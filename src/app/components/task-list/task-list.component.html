@@ -1,0 +1,51 @@
+<div class="task-list-container">
+  <h2>Tasks</h2>
+  <!-- Add this just below <h2>Tasks</h2> -->
+  <div style="margin-bottom: 1rem">
+    <label
+      >Sort by:
+      <select [(ngModel)]="sortBy" (change)="sortTasks()">
+        <option value="added">Date Added</option>
+        <option value="due">Due Date</option>
+        <option value="priority">Priority</option>
+      </select>
+    </label>
+  </div>
+  <app-task-form
+    *ngIf="showForm"
+    [editTask]="editingTask"
+    (formClose)="onFormClose()"
+  ></app-task-form>
+  <button *ngIf="!showForm" (click)="openAddForm()">+ Add Task</button>
+
+  <div
+    *ngIf="tasks.length === 0"
+    style="text-align: center; color: #888; margin-top: 1rem"
+  >
+    No tasks yet.
+  </div>
+
+  <div *ngFor="let task of tasks" class="task-item">
+    <input type="checkbox" [checked]="task.done" (change)="toggleDone(task)" />
+    <div class="task-info" [class.done]="task.done">
+      <strong>{{ task.title }}</strong>
+      <span
+        class="priority-tag"
+        [ngClass]="{
+          high: task.priority === 'High',
+          mid: task.priority === 'Mid',
+          low: task.priority === 'Low'
+        }"
+      >
+        {{ task.priority }}
+      </span>
+      <div style="font-size: 0.9em; color: #666">
+        Due: {{ task.dueDate }} {{ task.dueTime }}
+      </div>
+    </div>
+    <div class="task-actions">
+      <button (click)="editTask(task)">Edit</button>
+      <button (click)="confirmDelete(task)">Delete</button>
+    </div>
+  </div>
+</div>
