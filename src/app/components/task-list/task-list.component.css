@@ -1,9 +1,9 @@
 .task-list-container {
   max-width: 500px;
   margin: 2rem auto;
-  background: #fff;
+  background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px #0001;
+  box-shadow: 0 2px 8px rgb(110, 244, 142);
   padding: 2rem;
 }
 
@@ -60,4 +60,19 @@
 }
 .priority-tag.low {
   background: #388e3c;
+}
+button {
+  margin-right: 0.5rem;
+}
+::ng-deep .mat-mdc-snack-bar-action {
+  color: #1976d2 !important;
+  font-weight: bold;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+::ng-deep .mat-mdc-snack-bar-action:hover,
+::ng-deep .mat-mdc-snack-bar-action:focus {
+  background: transparent !important;
+  text-decoration: underline;
 }

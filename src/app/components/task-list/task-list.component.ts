@@ -53,8 +53,8 @@ export class TaskListComponent {
 
   sortTasks() {
     if (this.sortBy === 'due') {
-      this.tasks = [...this.tasks].sort((a, b) =>
-        a.dueDate.localeCompare(b.dueDate)
+      this.tasks = [...this.tasks].sort(
+        (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
       );
     } else if (this.sortBy === 'priority') {
       const order = { High: 1, Mid: 2, Low: 3 };
@@ -62,7 +62,6 @@ export class TaskListComponent {
         (a, b) => order[a.priority] - order[b.priority]
       );
     } else {
-      // Default: by id (date added)
       this.tasks = [...this.tasks].sort((a, b) => a.id - b.id);
     }
   }

@@ -1,35 +1,44 @@
-<form (ngSubmit)="saveTask()" style="margin-bottom: 1rem">
+<form (ngSubmit)="saveTask()" class="task-form">
   <input
     type="text"
     [(ngModel)]="task.title"
     name="title"
     placeholder="Task Title"
     required
+    class="full-width"
   />
-  <input
-    matInput
-    [matDatepicker]="picker"
-    [(ngModel)]="task.dueDate"
-    name="dueDate"
-    placeholder="Due Date"
-    required
-  />
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
 
-  <input
-    matInput
-    type="time"
-    [(ngModel)]="task.dueTime"
-    name="dueTime"
-    placeholder="Time"
+  <div class="row">
+    <input
+      type="date"
+      [(ngModel)]="task.dueDate"
+      name="dueDate"
+      required
+      class="half-width"
+    />
+
+    <input
+      type="time"
+      [(ngModel)]="task.dueTime"
+      name="dueTime"
+      required
+      class="half-width"
+    />
+  </div>
+
+  <select
+    [(ngModel)]="task.priority"
+    name="priority"
     required
-  />
-  <select [(ngModel)]="task.priority" name="priority">
+    class="full-width"
+  >
     <option value="High">High</option>
     <option value="Mid">Mid</option>
     <option value="Low">Low</option>
   </select>
-  <button type="submit">{{ editTask ? "Update" : "Add" }} Task</button>
-  <button type="button" (click)="formClose.emit()">Cancel</button>
+
+  <div class="button-row">
+    <button type="submit">{{ editTask ? "Update" : "Add" }} Task</button>
+    <button type="button" (click)="formClose.emit()">Cancel</button>
+  </div>
 </form>
